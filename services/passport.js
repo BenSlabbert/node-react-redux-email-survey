@@ -16,26 +16,24 @@ passport.deserializeUser(( id, done ) => {
 const keys = require('../config/keys');
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID || keys.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET || keys.CLIENT_SECRET,
-    callbackURL: '/auth/google/callback',
-    proxy: true
-}, ( accessToken, refreshToken, profile, done ) => {
+        clientID: process.env.CLIENT_ID || keys.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET || keys.CLIENT_SECRET,
+        callbackURL: '/auth/google/callback',
+        proxy: true
+    },
+    async ( accessToken, refreshToken, profile, done ) => {
 
-    let googleId = profile.id;
-    logger.info('Looking for user with googleId: ' + googleId);
+        let googleId = profile.id;
+        logger.info('Looking for user with googleId: ' + googleId);
 
-    User.findOne({ googleId })
-        .then(( existingUser ) => {
-                if ( existingUser ) {
-                    logger.info('User found');
-                    done(null, existingUser);
-                } else {
-                    logger.info('No user found, creating a new user');
-                    new User({ googleId, createdAt: new Date().getTime() })
-                        .save()
-                        .then(newUser => done(null, newUser));
-                }
-            }
-        );
-}));
+        const existingUser = await User.findOne({ googleId });
+        if ( existingUser ) {
+            logger.info('User found');
+            return done(null, existingUser);
+        }
+
+        logger.info('No user found, creating a new user');
+        const newUser = await new User({ googleId, createdAt: new Date().getTime() }).save();
+        return done(null, newUser);
+    })
+);
