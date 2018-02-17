@@ -7,7 +7,10 @@ const app = express();
 
 passport.use(new GoogleStrategy({
     clientID: keys.CLIENT_ID,
-    clientSecret: keys.CLIENT_SECRET
+    clientSecret: keys.CLIENT_SECRET,
+    callbackURL: '/auth/google/callback'
+}, accessToken => {
+    console.log(accessToken);
 }));
 
 const PORT = process.env.PORT || 5000;
