@@ -18,7 +18,8 @@ const keys = require('../config/keys');
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID || keys.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET || keys.CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
+    callbackURL: '/auth/google/callback',
+    proxy: true
 }, ( accessToken, refreshToken, profile, done ) => {
 
     let googleId = profile.id;
