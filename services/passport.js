@@ -34,7 +34,7 @@ passport.use(new GoogleStrategy({
                     done(null, existingUser);
                 } else {
                     logger.info('No user found, creating a new user');
-                    new User({ googleId })
+                    new User({ googleId, createdAt: new Date().getTime() })
                         .save()
                         .then(newUser => done(null, newUser));
                 }
