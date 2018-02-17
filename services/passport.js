@@ -3,8 +3,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config/keys');
 
 passport.use(new GoogleStrategy({
-    clientID: keys.CLIENT_ID,
-    clientSecret: keys.CLIENT_SECRET,
+    clientID: process.env.CLIENT_ID || keys.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET || keys.CLIENT_SECRET,
     callbackURL: '/auth/google/callback'
 }, ( accessToken, refreshToken, profile, done ) => {
     console.log('accessToken', accessToken);

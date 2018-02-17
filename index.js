@@ -8,7 +8,7 @@ require('./services/passport');
 logger.info('Done');
 
 logger.info('Connecting to MongoDB');
-mongoose.connect(keys.mongoURL);
+mongoose.connect(process.env.mongoURL || keys.mongoURL);
 logger.info('Done');
 
 const app = express();
