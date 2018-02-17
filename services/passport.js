@@ -13,10 +13,7 @@ passport.deserializeUser(( id, done ) => {
         .then(user => done(null, user));
 });
 
-let keys;
-if ( process.env.PROFILE === 'dev' ) {
-    keys = require('../config/keys');
-}
+const keys = require('../config/keys');
 
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID || keys.CLIENT_ID,

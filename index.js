@@ -4,10 +4,7 @@ const logger = require('./logger/logger');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
-let keys;
-if ( process.env.PROFILE === 'dev' ) {
-    keys = require('./config/keys');
-}
+const keys = require('./config/keys');
 
 // declare the model before mongoose needs it
 require('./models/User');
