@@ -1,8 +1,14 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const logger = require('./logger/logger');
+const keys = require('./config/keys');
 
 logger.info('Setting up Passport');
 require('./services/passport');
+logger.info('Done');
+
+logger.info('Connecting to MongoDB');
+mongoose.connect(keys.mongoURL);
 logger.info('Done');
 
 const app = express();
