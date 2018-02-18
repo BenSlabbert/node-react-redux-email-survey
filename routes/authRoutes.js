@@ -5,20 +5,21 @@ module.exports = ( app ) => {
     app.get('/auth/google',
         passport.authenticate('google', {
             // the info we want from google
-            scope: [ 'profile', 'email' ]
+            scope: ['profile', 'email']
         })
     );
 
     app.get('/auth/google/callback',
-        passport.authenticate('google'), ( req, res ) => {
+        passport.authenticate('google'),
+        ( req, res ) => {
             logger.info('User logged in, redirecting');
-            res.redirect('/api/current_user');
+            res.redirect('/surveys');
         }
     );
 
     app.get('/api/logout', ( req, res ) => {
         req.logout();
-        res.send(req.user);
+        res.redirect('/');
     });
 
     app.get('/api/current_user', ( req, res ) => {
