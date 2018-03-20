@@ -24,7 +24,7 @@ logger.info('Done');
 app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        keys: [ process.env.COOKIE_KEY || keys.cookieKey ] // randomly chooses one of these keys to encrypt
+        keys: [process.env.COOKIE_KEY || keys.cookieKey] // randomly chooses one of these keys to encrypt
     })
 );
 
@@ -33,6 +33,7 @@ app.use(passport.session());
 
 logger.info('Adding routes');
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 logger.info('Done');
 
 const PORT = process.env.PORT || 5000;
