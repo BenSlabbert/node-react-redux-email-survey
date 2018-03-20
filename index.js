@@ -21,16 +21,20 @@ logger.info('Starting Express');
 const app = express();
 logger.info('Done');
 
+logger.info('Adding middleware');
 app.use(
     cookieSession({
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        keys: [process.env.COOKIE_KEY || keys.cookieKey] // randomly chooses one of these keys to encrypt
+        // 30 days
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        // randomly chooses one of these keys to encrypt
+        keys: [process.env.COOKIE_KEY || keys.cookieKey]
     })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
+logger.info('Done');
 
 logger.info('Adding routes');
 require('./routes/authRoutes')(app);

@@ -27,7 +27,7 @@ passport.use(new GoogleStrategy({
         logger.info('Looking for user with googleId: ' + googleId);
 
         const existingUser = await User.findOne({ googleId });
-        if ( existingUser ) {
+        if (existingUser) {
             logger.info('User found');
             return done(null, existingUser);
         }
