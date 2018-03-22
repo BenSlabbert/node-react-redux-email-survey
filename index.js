@@ -8,6 +8,7 @@ const keys = require('./config/keys');
 
 // declare the model before mongoose needs it
 require('./models/User');
+require('./models/Surveys');
 require('./models/Charges');
 
 logger.info('Setting up Passport');
