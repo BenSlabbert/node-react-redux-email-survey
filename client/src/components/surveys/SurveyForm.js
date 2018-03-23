@@ -23,9 +23,7 @@ class SurveyForm extends Component {
     }
 
     render() {
-
         const { handleSubmit } = this.props;
-
         return (
             <div>
                 <form
