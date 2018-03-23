@@ -1,3 +1,5 @@
+const keys = require('../../config/keys');
+
 /**
  * Takes a survey object, which must have a body defined
  * @param survey
@@ -12,8 +14,8 @@ module.exports = survey => {
                     <p>Please answer the following:</p>
                     <p>${survey.body}</p>
                     <div>
-                        <a href="http://localhost:3000">Yes</a>
-                        <a href="http://localhost:3000">No</a>
+                        <a href="${keys.EMAIL_SURVEY_REDIRECT_DOMAIN}/api/surveys/thanks">Yes</a>
+                        <a href="${keys.EMAIL_SURVEY_REDIRECT_DOMAIN}/api/surveys/thanks">No</a>
                     </div>
                 </div>
             </body>
