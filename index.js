@@ -16,7 +16,7 @@ require('./services/passport');
 logger.info('Done');
 
 logger.info('Connecting to MongoDB');
-mongoose.connect(process.env.mongoURL || keys.mongoURL);
+mongoose.connect(process.env.MONGO_URL || keys.MONGO_URL);
 logger.info('Done');
 
 logger.info('Starting Express');
