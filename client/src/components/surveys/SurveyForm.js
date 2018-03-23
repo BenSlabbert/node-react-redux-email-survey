@@ -4,12 +4,13 @@ import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
 import SurveyField from './SurveyField';
+import validateEmails from '../../utils/validateEmails';
 
 const FIELDS = [
     { label: 'Survey Title', name: 'title' },
     { label: 'Subject Line', name: 'subject' },
     { label: 'Email Body', name: 'body' },
-    { label: 'Recipient List', name: 'recipientList' }
+    { label: 'Recipient List', name: 'emails' }
 ];
 
 /**
@@ -53,6 +54,9 @@ function validate( values ) {
     _.each(FIELDS, ( { name } ) => {
         if (!values[name]) errors[name] = `You must provide a ${name}`;
     });
+
+    if (!errors.emails)
+        errors.emails = validateEmails(values.emails);
 
     return errors;
 }
