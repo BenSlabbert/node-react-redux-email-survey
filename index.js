@@ -41,6 +41,7 @@ logger.info('Done');
 logger.info('Adding routes');
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 logger.info('Done');
 
 if (process.env.NODE_ENV === 'production') {
