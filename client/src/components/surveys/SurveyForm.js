@@ -53,8 +53,8 @@ function validate( values ) {
         if (!values[name]) errors[name] = `You must provide a ${name}`;
     });
 
-    if (!errors.emails)
-        errors.emails = validateEmails(values.emails);
+    if (!errors.recipients)
+        errors.recipients = validateEmails(values.recipients);
 
     return errors;
 }
