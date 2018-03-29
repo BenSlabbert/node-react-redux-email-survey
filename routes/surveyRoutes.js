@@ -11,7 +11,7 @@ const Survey = mongoose.model('surveys');
 const logger = require('../logger/logger');
 
 module.exports = app => {
-    app.get('/api/surveys/thanks', ( req, res ) => {
+    app.get('/api/surveys/:surveyId/:choice', ( req, res ) => {
         logger.info('Click event thanks');
         res.send('thanks for voting!');
     });
@@ -19,7 +19,7 @@ module.exports = app => {
     app.post('/api/surveys/webhooks', ( req, res ) => {
 
         const pathHelper = new Path('/api/surveys/:surveyId/:choice');
-
+        console.log('request from SendGrid', req.body);
         _.chain(req.body)
             .map(( { email, url } ) => {
                 const match = pathHelper.test(new URL(url).pathname);
