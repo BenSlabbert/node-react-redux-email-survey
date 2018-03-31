@@ -11,11 +11,31 @@ const Survey = mongoose.model('surveys');
 const logger = require('../logger/logger');
 
 module.exports = app => {
+
+    /**
+     * user must be logged in
+     * get a list of surveys for the user
+     **/
+    app.get('/api/surveys',
+        requireLogin,
+        async ( req, res ) => {
+            const surveys = await Survey.find({ _user: req.user.id })
+                .select({ recipients: false }) // exclude this field
+                .sort({ dateSent: -1 });
+            res.send(surveys);
+        });
+
+    /**
+     * Give some feedback to the user after they have voted
+     */
     app.get('/api/surveys/:surveyId/:choice', ( req, res ) => {
         logger.info('Click event thanks');
         res.send('thanks for voting!');
     });
 
+    /**
+     * handle webhook POST request from SendGrid
+     */
     app.post('/api/surveys/webhooks', ( req, res ) => {
 
         const pathHelper = new Path('/api/surveys/:surveyId/:choice');
