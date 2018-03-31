@@ -4,3 +4,5 @@ Following the course from Stephen Grider on Udemy: Node with React: Fullstack We
 
 see: [heroku node build docs](https://devcenter.heroku.com/articles/nodejs-support#build-behavior)
 for build specifics 
+
+app available at: https://node-react-redux-email-survey.herokuapp.com/
